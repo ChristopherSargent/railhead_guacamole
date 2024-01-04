@@ -1,4 +1,4 @@
-![alt text](rh_logo_small.jpg)
+![alt text](rh_small_logo.jpg)
 # Railhead Guacamole Project
 This repository contains the code and configuration instructions to deploy Apache Guacamole via podman to integrate MFA to Microsoft Active Directory User. For additional details, please email at [christopher.sargent@sargentwalker.io](mailto:christopher.sargent@sargentwalker.io).
 
