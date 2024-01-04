@@ -1,0 +1,57 @@
+ldapsearch -H ldap://172.18.0.138 -x -D "administrator@ida.local" -b "CN=Users,DC=ida,DC=local" -W
+
+Enter LDAP Password:
+# extended LDIF
+#
+# LDAPv3
+# base <CN=Users,DC=ida,DC=local> with scope subtree
+# filter: (objectclass=*)
+# requesting: ALL
+#
+
+# Users, ida.local
+dn: CN=Users,DC=ida,DC=local
+objectClass: top
+objectClass: container
+cn: Users
+description: Default container for upgraded user accounts
+distinguishedName: CN=Users,DC=ida,DC=local
+instanceType: 4
+whenCreated: 20231230204921.0Z
+whenChanged: 20231230204921.0Z
+uSNCreated: 5660
+uSNChanged: 5660
+showInAdvancedViewOnly: FALSE
+name: Users
+objectGUID:: B3lHV5Xok0G0sRrMw1lmAg==
+systemFlags: -1946157056
+objectCategory: CN=Container,CN=Schema,CN=Configuration,DC=ida,DC=local
+isCriticalSystemObject: TRUE
+dSCorePropagationData: 20231230205004.0Z
+dSCorePropagationData: 16010101000001.0Z
+
+podman-compose -f guacamole-compose.yml down
+rm -rf data/ drive/ init/ nginx/ record/
+./setup.sh
+podman-compose -f guacamole-compose.yml up -d
+podman logs -f cas_guacamole_compose
+
+ldapsearch -H ldap://172.18.0.138 -x -D "chris.sargent@ida.local" -b "CN=Users,DC=ida,DC=local" -W
+
+ldapsearch -H ldap://172.18.0.138 -x -D "guacamole@ida.local" -b "CN=Users,DC=ida,DC=local" -W
+
+podman exec -it -u:0 cas_guacamole_compose /bin/bash
+apt install dnsutils
+
+CN=Administrator,CN=Users,DC=ida,DC=local
+
+
+Get-ADOrganizationalUnit -Filter * -SearchBase "CN=Users,DC=ida,DC=local"
+
+
+LDAP logs in AD:
+1. Event Viewer > Windows Logs > Security > Filter Event id = 4624 > Refresh
+
+References:
+https://traviswhitney.com/2019/08/21/configuring-apache-guacamole-with-ldap-and-2fa/
+https://github.com/andif888/workfromhome-with-docker/blob/master/.env
