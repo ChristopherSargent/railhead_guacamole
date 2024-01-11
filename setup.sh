@@ -10,7 +10,7 @@ echo "done"
 
 # Create SSL certs
 echo "Creating SSL certificates"
-openssl req -nodes -newkey rsa:4096 -new -x509 -keyout nginx/ssl/self-ssl.key -out nginx/ssl/self.cert -subj '/C=US/ST=Virginia/L=Norfolk/O=SWC/OU=SWC/CN=guacamole01.ida.local'
+openssl req -nodes -newkey rsa:4096 -new -x509 -keyout nginx/ssl/self-ssl.key -out nginx/ssl/self.cert -subj '/C=US/ST=Virginia/L=Reston/O=Railhead/OU=Onrails/CN=gov.ash.mbx.001'
 echo "You can use your own certificates by placing the private key in nginx/ssl/self-ssl.key and the cert in nginx/ssl/self.cert"
 echo "done"
 
